@@ -21,7 +21,7 @@ Then finetune the model on the dataset of choice:
 
 `cd optagan/`
 
-    `python run_lm_vae_training.py \
+    python run_lm_vae_training.py \
         --output_dir=path/to/finetuned/model/directory \
         --dataset EMNLP \
         --encoder_model_type=bert \
@@ -46,12 +46,12 @@ Then finetune the model on the dataset of choice:
         --use_pretrained_model \
         --checkpoint_dir=path/to/pretrained/model/step508523 \
         --latent_size 768 \
-        --gloabl_step_eval 508523`
+        --gloabl_step_eval 508523
 
 
 Then run the code to train the GAN and finetune the decoder as:
 
-    `python optagan.py \
+    python optagan.py \
         --dataset EMNLP \
         --checkpoint_dir=path/to/finetuned/model \
         --output_dir=path/to/GAN/directory \
@@ -73,14 +73,14 @@ Then run the code to train the GAN and finetune the decoder as:
         --finetune_decoder True \
         --lr_rl 1e-5 \
         --epochs_rl 5000 \
-        --batch_size_rl 32`
+        --batch_size_rl 32
     
     
 ### Generating sentences
 
 The code to generate sentences and optionally save them to a file is:
 
-    `python wgan_test.py \
+    python wgan_test.py \
         --checkpoint_dir=path/to/finetuned/model \
         --output_dir=path/to/output/directory \
         --generator_dir=path/to/GAN/model \
@@ -93,7 +93,7 @@ The code to generate sentences and optionally save them to a file is:
         --n_layers 10 \
         --top_p 0.9 \
         --output_name=results \
-        --save True`
+        --save True
     
 ### Evaluation
 
