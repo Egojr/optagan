@@ -2,7 +2,7 @@
 
 This repository contains the code of the paper: link TDB.
 
-It provides a tool for both unconditional and conditional text generation, using the Optimus VAE model, along with a GAN structure and entropy regularized RL finetuning.
+OptAGAN stands for Opt(imus) A(ugmented) GAN. It provides a tool for both unconditional and conditional text generation, using the Optimus VAE model, along with a GAN structure and entropy regularized RL finetuning.
 
 ### Installation
 To reproduce the results presented in the paper, first clone the repository in your environment and install the requirements. 
@@ -97,7 +97,7 @@ The code to generate sentences and optionally save them to a file is:
     
 ### Evaluation
 
-Evaluation of the results can be performed by using the two simple and easy to use scripts: `get_fid.py` and `get_bleu.py`. To calculate the FID score, however, the GLOVE embeddings and the InferSent model and required, and they can be downloaded from [InferSent repository.](https://github.com/facebookresearch/InferSent)
+Evaluation of the results can be performed by using the two simple and easy to use scripts: `get_fid.py` and `get_bleu.py`. To calculate the FID score, however, the GLOVE embeddings and the InferSent model are required, and they can be downloaded from [InferSent repository.](https://github.com/facebookresearch/InferSent)
 
 
 ### References
