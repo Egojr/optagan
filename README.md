@@ -71,8 +71,8 @@ Then run the code to train the GAN and finetune the decoder as:
         --interval 50 \
         --epochs 50 \
         --finetune_decoder True \
-        --lr_rl 1e-5 \
-        --epochs_rl 5000 \
+        --lr_rl 1e-6 \
+        --epochs_rl 1000 \
         --batch_size_rl 32
     
     
