@@ -897,7 +897,7 @@ class GPT2ForLatentConnectorValueHead(GPT2PreTrainedModel):
         self.v_head.detach_head = True
 
     def forward(self, input_ids, past=None, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
-                labels=None, label_ignore=None):
+                labels=None, label_ignore=None, detach=False):
 
         transformer_outputs = self.transformer(input_ids,
                                                past=past,
@@ -910,9 +910,13 @@ class GPT2ForLatentConnectorValueHead(GPT2PreTrainedModel):
         hidden_states = transformer_outputs[0]
 
         # Detach hidden states so not to modify the learned latent structure of the model, and only train final layers
-        cp_hidden_states = hidden_states.detach().clone()
-        lm_logits = self.lm_head(cp_hidden_states)
-        value = self.v_head(cp_hidden_states).squeeze(-1)
+        if detach:
+            cp_hidden_states = hidden_states.detach().clone()
+            lm_logits = self.lm_head(cp_hidden_states)
+            value = self.v_head(cp_hidden_states).squeeze(-1)
+        else:
+            lm_logits = self.lm_head(hidden_states)
+            value = self.v_head(hidden_states).squeeze(-1)          
         
         outputs = (lm_logits,) + transformer_outputs[1:] + (value,)
         if labels is not None:
