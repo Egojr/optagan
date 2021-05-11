@@ -124,7 +124,7 @@ def pad_seq(list_, value, length):
         mask.append([*[1] * len(elem[:length]), *[0] * (length - len(elem[:length]))])
     return out, mask
 
-def rollout(act_model, latent_z, tokenizer_decoder, length, batch_size, temperature):
+def rollout(act_model, latent_z, tokenizer_decoder, length, batch_size, temperature, detac=True):
     act_vals = []
     act_text = []
     # act_logits = []
@@ -138,7 +138,7 @@ def rollout(act_model, latent_z, tokenizer_decoder, length, batch_size, temperat
     # with torch.no_grad():
     for _ in range(length):
         act_inputs = {'input_ids': act_generated, 'past': latent_z}
-        outputs = act_model(**act_inputs)
+        outputs = act_model(**act_inputs, detach=detac)
         next_token_logits = outputs[0][:, -1, :] / temperature
         act_vals.append(outputs[2][:,-1])
         # act_logits.append(next_token_logits)
