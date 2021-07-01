@@ -175,13 +175,16 @@ if __name__ == '__main__':
             label.extend([i] * int(classes_lab))
         label = torch.LongTensor(label).to(args.device)
     else:
-        label = torch.LongTensor(int(args.generate_label)).to(args.device).unsqueeze(0).unsqueeze(1)
+        label = list()
+        label.extend(args.new_sent * [int(args.generate_label)])
+        label = torch.LongTensor(label).to(args.device)
 
     # Get number of generation iterations
     for i in range(0, int(args.new_sent/args.batch_size)):
         # sample noise
         noise = torch.Tensor(np.random.normal(0, 1, (args.batch_size, args.latent_size))).to(args.device)
         new_z = generator(noise, label[i*args.batch_size:args.batch_size*(i+1)]).data
+        
 
         # create new sent
         sents = rollout_test(model_decoder, new_z, tokenizer_decoder, args.max_seq_length, args.batch_size, args.top_k, args.top_p)
