@@ -1,6 +1,6 @@
 # OptAGAN
 
-This repository contains the code of the paper: link TDB.
+This repository contains the code of the paper: [OptAGAN: Entropy-based finetuning on text VAE-GAN](https://arxiv.org/abs/2109.00239)
 
 OptAGAN stands for Opt(imus) A(ugmented) GAN. It provides a tool for both unconditional and conditional text generation, using the Optimus VAE model, along with a GAN structure and entropy regularized RL finetuning.
 
